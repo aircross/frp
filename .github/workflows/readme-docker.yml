@@ -12,8 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sync README.md to DockerHub frps
-        uses: actionhippie/pushrm@v1
+      - uses: actionhippie/pushrm@v1
         with:
           provider: dockerhub
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -21,8 +20,7 @@ jobs:
           target: ${{ secrets.DOCKERHUB_USERNAME }}/frps
 
 
-      - name: Sync README.md to DockerHub frpc
-        uses: actionhippie/pushrm@v1
+      - uses: actionhippie/pushrm@v1
         with:
           provider: dockerhub
           username: ${{ secrets.DOCKERHUB_USERNAME }}
