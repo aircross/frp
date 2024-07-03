@@ -14,8 +14,8 @@ jobs:
 
       - name: Sync README.md to DockerHub frps
         uses: actionhippie/pushrm@v1
-        provider: dockerhub
         with:
+          provider: dockerhub
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           target: ${{ secrets.DOCKERHUB_USERNAME }}/frps
@@ -23,8 +23,8 @@ jobs:
 
       - name: Sync README.md to DockerHub frpc
         uses: actionhippie/pushrm@v1
-        provider: dockerhub
         with:
+          provider: dockerhub
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           target: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
