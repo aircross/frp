@@ -81,7 +81,7 @@ linters-settings:
     sections:
     - standard
     - default
-    - prefix(github.com/aircross/frp/)
+    - prefix(github.com/fatedier/frp/)
   gosec:
     severity: "low"
     confidence: "low"
