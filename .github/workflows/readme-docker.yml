@@ -2,8 +2,6 @@ name: README-to-DockerHub
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "dev" ]
 
 jobs:
   build:
@@ -18,12 +16,4 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           target: ${{ secrets.DOCKERHUB_USERNAME }}/frps
-
-
-      - uses: actionhippie/pushrm@v1
-        with:
-          provider: dockerhub
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          target: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
   
