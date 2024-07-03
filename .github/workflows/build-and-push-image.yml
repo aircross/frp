@@ -44,24 +44,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Sync frps README.md
-        uses: ms-jpq/sync-dockerhub-readme@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          # repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frps
-          readme: "README.md"
-
-      - name: Sync frpc README.md
-        uses: ms-jpq/sync-dockerhub-readme@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          # repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
-          readme: "README.md"
-
       - name: Login to the GPR
         uses: docker/login-action@v3
         with:
@@ -108,3 +90,19 @@ jobs:
             ${{ env.TAG_FRPS_LATEST }}
             ${{ env.TAG_FRPS_GPR }}
             ${{ env.TAG_FRPS_GPR_LATEST }}
+
+      - name: Sync frps README.md
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frps
+          readme: "README.md"
+
+      - name: Sync frpc README.md
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
+          readme: "README.md"
