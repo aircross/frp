@@ -18,35 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: Login to the GPR
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GPR_TOKEN }}
-
-      - name: Sync frps README.md
-        uses: ms-jpq/sync-dockerhub-readme@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frps
-          readme: "README.md"
-
-      - name: Sync frpc README.md
-        uses: ms-jpq/sync-dockerhub-readme@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
-          readme: "README.md"
-
       # environment
       - name: Checkout
         uses: actions/checkout@v4
@@ -68,6 +39,19 @@ jobs:
             echo "TAG_NAME=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
           fi
 
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Login to the GPR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GPR_TOKEN }}
+
       # prepare image tags
       - name: Prepare Image Tags
         run: |
@@ -81,6 +65,22 @@ jobs:
           echo "TAG_FRPS_LATEST=aircross/frps:latest" >> $GITHUB_ENV
           echo "TAG_FRPC_GPR_LATEST=ghcr.io/aircross/frpc:latest" >> $GITHUB_ENV
           echo "TAG_FRPS_GPR_LATEST=ghcr.io/aircross/frps:latest" >> $GITHUB_ENV
+
+      - name: Sync frps README.md
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frps
+          readme: "README.md"
+
+      - name: Sync frpc README.md
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
+          readme: "README.md"
 
       - name: Build and push frpc
         uses: docker/build-push-action@v5
