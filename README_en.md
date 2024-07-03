@@ -1,7 +1,55 @@
 # frp
 
-[README](README_en.md) | [中文文档](README.md)
+[README](https://github.com/aircross/frp/blob/dev/README_en.md) | [中文文档](https://github.com/aircross/frp/blob/dev/README.md)
 
+## Docker Quick Guide
+#### Install Docker
+```
+#If your server is outside China, you can run the command below to install Docker
+curl -fsSL https://get.docker.com | sh
+```
+For installation in China, please refer to the following tutorial and use it in conjunction with a server that can access download.docker.com
+#### [和谐之后如何在国内安装Docker及拉取镜像使用](https://vps.la/2024/07/01/%e5%92%8c%e8%b0%90%e4%b9%8b%e5%90%8e%e5%a6%82%e4%bd%95%e5%9c%a8%e5%9b%bd%e5%86%85%e5%ae%89%e8%a3%85docker%e5%8f%8a%e6%8b%89%e5%8f%96%e9%95%9c%e5%83%8f%e4%bd%bf%e7%94%a8/)
+
+#### run the Frps
+
+```shell
+
+mkdir -p /opt/docker/frp/
+
+tee /opt/docker/frp/frps.toml <<-'EOF'
+bindPort = 7000
+# default is 127.0.0.1，change to 0.0.0.0 for the internet use
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+# username and password for dashboard 
+webServer.user = "admin"
+webServer.password = "admin"
+# auth token
+auth.token = "your token Here"
+EOF
+docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
+```
+
+#### run the Frpc
+```
+mkdir -p /opt/docker/frp/
+
+tee /opt/docker/frp/frpc.toml <<-'EOF'
+serverAddr = "your frps ip here"
+serverPort = 7000
+# auth token
+auth.token = "your token Here"
+
+[[proxies]]
+name = "Node1_SSH"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 40022
+EOF
+docker run --name frpc -d --network host --restart=unless-stopped -v /opt/docker/frp/frpc.toml:/etc/frp/frpc.toml  aircross/frpc
+```
 
 ## What is frp?
 
@@ -14,6 +62,11 @@ frp also offers a P2P connect mode.
 <!-- vim-markdown-toc GFM -->
 
 - [frp](#frp)
+  - [Docker Quick Guide](#docker-quick-guide)
+      - [Install Docker](#install-docker)
+      - [和谐之后如何在国内安装Docker及拉取镜像使用](#和谐之后如何在国内安装docker及拉取镜像使用)
+      - [run the Frps](#run-the-frps)
+      - [run the Frpc](#run-the-frpc)
   - [What is frp?](#what-is-frp)
   - [Table of Contents](#table-of-contents)
   - [Development Status](#development-status)

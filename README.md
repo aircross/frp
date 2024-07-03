@@ -1,6 +1,55 @@
 # frp
 
-[README](README_en.md) | [中文文档](README.md)
+[README](https://github.com/aircross/frp/blob/dev/README_en.md) | [中文文档](https://github.com/aircross/frp/blob/dev/README.md)
+
+## Docker快速部署
+#### 安装Docker
+```
+#国外服务器使用以下命令安装Docker
+curl -fsSL https://get.docker.com | sh
+```
+国内的请参照下面这个教程安装，需要配合能访问download.docker.com的服务器服用
+#### [和谐之后如何在国内安装Docker及拉取镜像使用](https://vps.la/2024/07/01/%e5%92%8c%e8%b0%90%e4%b9%8b%e5%90%8e%e5%a6%82%e4%bd%95%e5%9c%a8%e5%9b%bd%e5%86%85%e5%ae%89%e8%a3%85docker%e5%8f%8a%e6%8b%89%e5%8f%96%e9%95%9c%e5%83%8f%e4%bd%bf%e7%94%a8/)
+
+#### 运行Frps的镜像
+
+```shell
+
+mkdir -p /opt/docker/frp/
+
+tee /opt/docker/frp/frps.toml <<-'EOF'
+bindPort = 7000
+# 默认为 127.0.0.1，如果需要公网访问，需要修改为 0.0.0.0。
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+# dashboard 用户名密码，可选，默认为空
+webServer.user = "admin"
+webServer.password = "admin"
+# auth token
+auth.token = "your token Here"
+EOF
+docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
+```
+
+#### 运行Frpc的镜像
+```
+mkdir -p /opt/docker/frp/
+
+tee /opt/docker/frp/frpc.toml <<-'EOF'
+serverAddr = "your frps ip here"
+serverPort = 7000
+# auth token
+auth.token = "your token Here"
+
+[[proxies]]
+name = "Node1_SSH"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 40022
+EOF
+docker run --name frpc -d --network host --restart=unless-stopped -v /opt/docker/frp/frpc.toml:/etc/frp/frpc.toml  aircross/frpc
+```
 
 frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议，且支持 P2P 通信。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。
 
