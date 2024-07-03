@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - uses: actionhippie/pushrm@v1
         with:
           provider: dockerhub
+          target: aircross/frps
+          description: Docker image for Frps
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          target: ${{ secrets.DOCKERHUB_USERNAME }}/frps
   
