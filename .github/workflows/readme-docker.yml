@@ -24,8 +24,8 @@ jobs:
       - uses: actionhippie/pushrm@v1
         with:
           provider: dockerhub
-          target: ${{ secrets.DOCKERHUB_USERNAME }}/frps
-          description: Docker image for Frps
+          target: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
+          description: Docker image for Frpc
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
   
