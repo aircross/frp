@@ -1,6 +1,6 @@
 # frp
 
-[README](https://github.com/aircross/frp/blob/dev/README_en.md) | [中文文档](https://github.com/aircross/frp/blob/dev/README.md)
+[中文文档](https://github.com/aircross/frp/blob/dev/README.md) | [README](https://github.com/aircross/frp/blob/dev/README_en.md)
 
 ## Docker快速部署
 #### 安装Docker
@@ -50,6 +50,15 @@ remotePort = 40022
 EOF
 docker run --name frpc -d --network host --restart=unless-stopped -v /opt/docker/frp/frpc.toml:/etc/frp/frpc.toml  aircross/frpc
 ```
+
+## 推荐服务器
+如果你觉得本项目对你有用,而且你也恰巧有这方面的需求,你也可以选择通过我的购买链接赞助我  
+- [搬瓦工GIA高端线路](https://bandwagonhost.com/aff.php?aff=38140),仅推荐购买GIA套餐  
+- [Spartan三网4837性价比主机](https://billing.spartanhost.net/aff.php?aff=1156)
+- [Dmit](https://www.dmit.io/aff.php?aff=9771)    
+- [Linode](https://www.linode.com/lp/refer/?r=107a1afa3e657b37fc273df95803557588e7dcc5)    
+- [Vultr](https://www.vultr.com/?ref=7130790)    
+- [Cloudcone性价比主机提供商](https://app.cloudcone.com/?ref=2227)  
 
 frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议，且支持 P2P 通信。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。
 
