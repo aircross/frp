@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Sync README.md to DockerHub frps
         uses: ms-jpq/sync-dockerhub-readme@v1
