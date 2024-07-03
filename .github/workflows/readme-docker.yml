@@ -4,31 +4,28 @@ on:
   workflow_dispatch:
   push:
     branches: [ "dev" ]
-    paths:
-    - 'README.md'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - name: Sync README.md to DockerHub frps
-        uses: ms-jpq/sync-dockerhub-readme@v1
+        uses: actionhippie/pushrm@v1
+        provider: dockerhub
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frps
-          readme: "./README.md"
+          target: ${{ secrets.DOCKERHUB_USERNAME }}/frps
 
 
       - name: Sync README.md to DockerHub frpc
-        uses: ms-jpq/sync-dockerhub-readme@v1
+        uses: actionhippie/pushrm@v1
+        provider: dockerhub
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
-          readme: "./README.md"
+          target: ${{ secrets.DOCKERHUB_USERNAME }}/frpc
   
