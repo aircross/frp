@@ -31,7 +31,6 @@ import (
 
 	v1 "github.com/fatedier/frp/pkg/config/v1"
 	"github.com/fatedier/frp/pkg/transport"
-	ippkg "github.com/fatedier/frp/pkg/util/ip"
 	netpkg "github.com/fatedier/frp/pkg/util/net"
 	"github.com/fatedier/frp/pkg/util/xlog"
 )
@@ -76,7 +75,7 @@ func (c *defaultConnectorImpl) Open() error {
 			sn = c.cfg.ServerAddr
 		}
 		// 判断c.cfg.ServerAddr是否IP
-		serverIP, err := ippkg.GetDomainIP(c.cfg.ServerAddr)
+		serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
 		if err != nil {
 			xl.Warnf("get serverIP fail, err: %v", err)
 			return err
@@ -215,7 +214,7 @@ func (c *defaultConnectorImpl) realConnect() (net.Conn, error) {
 		libnet.WithProxyAuth(auth),
 	)
 	// 判断c.cfg.ServerAddr是否IP
-	serverIP, err := ippkg.GetDomainIP(c.cfg.ServerAddr)
+	serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
 	if err == nil {
 		conn, err := libnet.DialContext(
 			c.ctx,

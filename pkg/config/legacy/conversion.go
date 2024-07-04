@@ -19,7 +19,7 @@ import (
 
 	"github.com/samber/lo"
 
-	ippkg "github.com/aircross/frp/pkg/util/ip"
+	netpkg "github.com/aircross/frp/pkg/util/ip"
 	"github.com/fatedier/frp/pkg/config/types"
 	v1 "github.com/fatedier/frp/pkg/config/v1"
 )
@@ -42,7 +42,7 @@ func Convert_ClientCommonConf_To_v1(conf *ClientCommonConf) *v1.ClientCommonConf
 	out.Auth.OIDC.TokenEndpointURL = conf.ClientConfig.OidcTokenEndpointURL
 	out.Auth.OIDC.AdditionalEndpointParams = conf.ClientConfig.OidcAdditionalEndpointParams
 
-	out.ServerAddr = ippkg.GetDomainIP(conf.ServerAddr)
+	out.ServerAddr = netpkg.GetDomainIP(conf.ServerAddr)
 	out.ServerPort = conf.ServerPort
 	out.NatHoleSTUNServer = conf.NatHoleSTUNServer
 	out.Transport.DialServerTimeout = conf.DialServerTimeout
