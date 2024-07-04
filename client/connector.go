@@ -88,10 +88,11 @@ func (c *defaultConnectorImpl) Open() error {
 			return err
 		}
 		tlsConfig.NextProtos = []string{"frp"}
+		serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
 
 		conn, err := quic.DialAddr(
 			c.ctx,
-			net.JoinHostPort(netpkg.GetDomainIP(c.cfg.ServerAddr), strconv.Itoa(c.cfg.ServerPort)),
+			net.JoinHostPort(serverIP, strconv.Itoa(c.cfg.ServerPort)),
 			tlsConfig, &quic.Config{
 				MaxIdleTimeout:     time.Duration(c.cfg.Transport.QUIC.MaxIdleTimeout) * time.Second,
 				MaxIncomingStreams: int64(c.cfg.Transport.QUIC.MaxIncomingStreams),
@@ -206,9 +207,10 @@ func (c *defaultConnectorImpl) realConnect() (net.Conn, error) {
 		libnet.WithProxy(proxyType, addr),
 		libnet.WithProxyAuth(auth),
 	)
+	serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
 	conn, err := libnet.DialContext(
 		c.ctx,
-		net.JoinHostPort(netpkg.GetDomainIP(c.cfg.ServerAddr), strconv.Itoa(c.cfg.ServerPort)),
+		net.JoinHostPort(serverIP, strconv.Itoa(c.cfg.ServerPort)),
 		dialOptions...,
 	)
 	return conn, err
