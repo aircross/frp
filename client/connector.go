@@ -17,7 +17,6 @@ package client
 import (
 	"context"
 	"crypto/tls"
-	"fmt"
 	"io"
 	"net"
 	"strconv"
@@ -89,9 +88,7 @@ func (c *defaultConnectorImpl) Open() error {
 			return err
 		}
 		tlsConfig.NextProtos = []string{"frp"}
-		serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
-		fmt.Println(err)
-
+		serverIP, _ := netpkg.GetDomainIP(c.cfg.ServerAddr)
 		conn, err := quic.DialAddr(
 			c.ctx,
 			net.JoinHostPort(serverIP, strconv.Itoa(c.cfg.ServerPort)),
@@ -209,8 +206,7 @@ func (c *defaultConnectorImpl) realConnect() (net.Conn, error) {
 		libnet.WithProxy(proxyType, addr),
 		libnet.WithProxyAuth(auth),
 	)
-	serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
-	fmt.Println(err)
+	serverIP, _ := netpkg.GetDomainIP(c.cfg.ServerAddr)
 	conn, err := libnet.DialContext(
 		c.ctx,
 		net.JoinHostPort(serverIP, strconv.Itoa(c.cfg.ServerPort)),

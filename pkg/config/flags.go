@@ -152,8 +152,7 @@ func RegisterClientCommonConfigFlags(cmd *cobra.Command, c *v1.ClientCommonConfi
 	}
 
 	if !options.sshMode {
-		serverIP, err := netpkg.GetDomainIP(c.ServerAddr)
-		fmt.Println(err)
+		serverIP, _ := netpkg.GetDomainIP(c.ServerAddr)
 		cmd.PersistentFlags().StringVarP(&serverIP, "server_addr", "s", "127.0.0.1", "frp server's address")
 		cmd.PersistentFlags().IntVarP(&c.ServerPort, "server_port", "P", 7000, "frp server's port")
 		cmd.PersistentFlags().StringVarP(&c.Transport.Protocol, "protocol", "p", "tcp",
