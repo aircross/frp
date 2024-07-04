@@ -7,6 +7,10 @@
 ```
 #If your server is outside China, you can run the command below to install Docker
 curl -fsSL https://get.docker.com | sh
+# auto startup
+sudo systemctl enable docker.service
+# change to what you want start|restart|stop
+sudo service docker start
 ```
 For installation in China, please refer to the following tutorial and use it in conjunction with a server that can access download.docker.com
 #### [和谐之后如何在国内安装Docker及拉取镜像使用](https://vps.la/2024/07/01/%e5%92%8c%e8%b0%90%e4%b9%8b%e5%90%8e%e5%a6%82%e4%bd%95%e5%9c%a8%e5%9b%bd%e5%86%85%e5%ae%89%e8%a3%85docker%e5%8f%8a%e6%8b%89%e5%8f%96%e9%95%9c%e5%83%8f%e4%bd%bf%e7%94%a8/)
