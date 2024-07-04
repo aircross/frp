@@ -15,7 +15,6 @@
 package legacy
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/samber/lo"
@@ -42,8 +41,7 @@ func Convert_ClientCommonConf_To_v1(conf *ClientCommonConf) *v1.ClientCommonConf
 	out.Auth.OIDC.Scope = conf.ClientConfig.OidcScope
 	out.Auth.OIDC.TokenEndpointURL = conf.ClientConfig.OidcTokenEndpointURL
 	out.Auth.OIDC.AdditionalEndpointParams = conf.ClientConfig.OidcAdditionalEndpointParams
-	serverIP, err := netpkg.GetDomainIP(conf.ServerAddr)
-	fmt.Println(err)
+	serverIP, _ := netpkg.GetDomainIP(conf.ServerAddr)
 	out.ServerAddr = serverIP
 	out.ServerPort = conf.ServerPort
 	out.NatHoleSTUNServer = conf.NatHoleSTUNServer
