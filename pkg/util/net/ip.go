@@ -41,10 +41,7 @@ func GetDomainIP(domain string) (string, error) {
 		if ipv4 := ip.To4(); ipv4 != nil {
 			return ipv4.String(), nil
 		}
-	}
-
-	// 如果没有找到 IPv4 地址，则返回第一个 IPv6 地址
-	for _, ip := range ips {
+		// 如果没有找到 IPv4 地址，则返回第一个 IPv6 地址
 		if ipv4 := ip.To4(); ipv4 == nil {
 			fmt.Println(ip.String())
 			return ip.String(), nil
