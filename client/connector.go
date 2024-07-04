@@ -257,9 +257,8 @@ func (c *defaultConnectorImpl) realConnect() (net.Conn, error) {
 			dialOptions...,
 		)
 		return conn, err
-	} else {
-		return nil, err
 	}
+	return nil, err
 }
 
 func (c *defaultConnectorImpl) Close() error {
