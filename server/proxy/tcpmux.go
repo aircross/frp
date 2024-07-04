@@ -20,9 +20,9 @@ import (
 	"reflect"
 	"strings"
 
-	v1 "github.com/fatedier/frp/pkg/config/v1"
-	"github.com/fatedier/frp/pkg/util/util"
-	"github.com/fatedier/frp/pkg/util/vhost"
+	v1 "github.com/aircross/frp/pkg/config/v1"
+	"github.com/aircross/frp/pkg/util/util"
+	"github.com/aircross/frp/pkg/util/vhost"
 )
 
 func init() {

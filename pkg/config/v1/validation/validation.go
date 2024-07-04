@@ -17,8 +17,8 @@ package validation
 import (
 	"errors"
 
-	v1 "github.com/fatedier/frp/pkg/config/v1"
-	splugin "github.com/fatedier/frp/pkg/plugin/server"
+	v1 "github.com/aircross/frp/pkg/config/v1"
+	splugin "github.com/aircross/frp/pkg/plugin/server"
 )
 
 var (

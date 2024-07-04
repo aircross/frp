@@ -17,7 +17,7 @@ package proxy
 import (
 	"reflect"
 
-	v1 "github.com/fatedier/frp/pkg/config/v1"
+	v1 "github.com/aircross/frp/pkg/config/v1"
 )
 
 func init() {

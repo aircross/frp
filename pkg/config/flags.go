@@ -22,10 +22,10 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/fatedier/frp/pkg/config/types"
-	v1 "github.com/fatedier/frp/pkg/config/v1"
-	"github.com/fatedier/frp/pkg/config/v1/validation"
-	netpkg "github.com/fatedier/frp/pkg/util/ip"
+	"github.com/aircross/frp/pkg/config/types"
+	v1 "github.com/aircross/frp/pkg/config/v1"
+	"github.com/aircross/frp/pkg/config/v1/validation"
+	netpkg "github.com/aircross/frp/pkg/util/ip"
 )
 
 // WordSepNormalizeFunc changes all flags that contain "_" separators

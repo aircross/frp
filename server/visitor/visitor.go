@@ -23,8 +23,8 @@ import (
 
 	libio "github.com/fatedier/golib/io"
 
-	netpkg "github.com/fatedier/frp/pkg/util/net"
-	"github.com/fatedier/frp/pkg/util/util"
+	netpkg "github.com/aircross/frp/pkg/util/net"
+	"github.com/aircross/frp/pkg/util/util"
 )
 
 type listenerBundle struct {

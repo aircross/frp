@@ -7,10 +7,10 @@ import (
 
 	"github.com/onsi/ginkgo/v2"
 
-	"github.com/fatedier/frp/test/e2e/framework"
-	"github.com/fatedier/frp/test/e2e/framework/consts"
-	"github.com/fatedier/frp/test/e2e/pkg/cert"
-	"github.com/fatedier/frp/test/e2e/pkg/port"
+	"github.com/aircross/frp/test/e2e/framework"
+	"github.com/aircross/frp/test/e2e/framework/consts"
+	"github.com/aircross/frp/test/e2e/pkg/cert"
+	"github.com/aircross/frp/test/e2e/pkg/port"
 )
 
 type generalTestConfigures struct {

@@ -29,10 +29,10 @@ import (
 	quic "github.com/quic-go/quic-go"
 	"github.com/samber/lo"
 
+	v1 "github.com/aircross/frp/pkg/config/v1"
+	"github.com/aircross/frp/pkg/transport"
 	netpkg "github.com/aircross/frp/pkg/util/net"
-	v1 "github.com/fatedier/frp/pkg/config/v1"
-	"github.com/fatedier/frp/pkg/transport"
-	"github.com/fatedier/frp/pkg/util/xlog"
+	"github.com/aircross/frp/pkg/util/xlog"
 )
 
 // Connector is an interface for establishing connections to the server.
