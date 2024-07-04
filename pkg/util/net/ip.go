@@ -35,7 +35,6 @@ func GetDomainIP(domain string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	// 遍历 IP 地址，优先返回 IPv4 地址
 	for _, ip := range ips {
 		if ipv4 := ip.To4(); ipv4 != nil {
@@ -47,6 +46,5 @@ func GetDomainIP(domain string) (string, error) {
 			return ip.String(), nil
 		}
 	}
-
 	return "", fmt.Errorf("no IP addresses found for domain: %s", domain)
 }
