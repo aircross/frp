@@ -25,7 +25,7 @@ import (
 	"github.com/aircross/frp/pkg/config/types"
 	v1 "github.com/aircross/frp/pkg/config/v1"
 	"github.com/aircross/frp/pkg/config/v1/validation"
-	netpkg "github.com/aircross/frp/pkg/util/ip"
+	netpkg "github.com/aircross/frp/pkg/util/net"
 )
 
 // WordSepNormalizeFunc changes all flags that contain "_" separators

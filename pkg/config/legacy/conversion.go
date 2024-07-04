@@ -21,7 +21,7 @@ import (
 
 	"github.com/aircross/frp/pkg/config/types"
 	v1 "github.com/aircross/frp/pkg/config/v1"
-	netpkg "github.com/aircross/frp/pkg/util/ip"
+	netpkg "github.com/aircross/frp/pkg/util/net"
 )
 
 func Convert_ClientCommonConf_To_v1(conf *ClientCommonConf) *v1.ClientCommonConfig {
