@@ -20,15 +20,15 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/aircross/frp/client/proxy"
+	"github.com/aircross/frp/client/visitor"
+	"github.com/aircross/frp/pkg/auth"
+	v1 "github.com/aircross/frp/pkg/config/v1"
+	"github.com/aircross/frp/pkg/msg"
+	"github.com/aircross/frp/pkg/transport"
 	netpkg "github.com/aircross/frp/pkg/util/net"
-	"github.com/fatedier/frp/client/proxy"
-	"github.com/fatedier/frp/client/visitor"
-	"github.com/fatedier/frp/pkg/auth"
-	v1 "github.com/fatedier/frp/pkg/config/v1"
-	"github.com/fatedier/frp/pkg/msg"
-	"github.com/fatedier/frp/pkg/transport"
-	"github.com/fatedier/frp/pkg/util/wait"
-	"github.com/fatedier/frp/pkg/util/xlog"
+	"github.com/aircross/frp/pkg/util/wait"
+	"github.com/aircross/frp/pkg/util/xlog"
 )
 
 type SessionContext struct {

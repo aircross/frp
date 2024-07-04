@@ -28,9 +28,9 @@ import (
 	libio "github.com/fatedier/golib/io"
 	libnet "github.com/fatedier/golib/net"
 
-	v1 "github.com/fatedier/frp/pkg/config/v1"
-	netpkg "github.com/fatedier/frp/pkg/util/net"
-	"github.com/fatedier/frp/pkg/util/util"
+	v1 "github.com/aircross/frp/pkg/config/v1"
+	netpkg "github.com/aircross/frp/pkg/util/net"
+	"github.com/aircross/frp/pkg/util/util"
 )
 
 func init() {

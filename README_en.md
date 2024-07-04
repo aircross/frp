@@ -171,13 +171,13 @@ We sincerely appreciate your support for frp.
 
 ## Example Usage
 
-To begin, download the latest program for your operating system and architecture from the [Release](https://github.com/fatedier/frp/releases) page.
+To begin, download the latest program for your operating system and architecture from the [Release](https://github.com/aircross/frp/releases) page.
 
 Next, place the `frps` binary and server configuration file on Server A, which has a public IP address.
 
 Finally, place the `frpc` binary and client configuration file on Server B, which is located on a LAN that cannot be directly accessed from the public internet.
 
-Some antiviruses improperly mark frpc as malware and delete it. This is due to frp being a networking tool capable of creating reverse proxies. Antiviruses sometimes flag reverse proxies due to their ability to bypass firewall port restrictions. If you are using antivirus, then you may need to whitelist/exclude frpc in your antivirus settings to avoid accidental quarantine/deletion. See [issue 3637](https://github.com/fatedier/frp/issues/3637) for more details.
+Some antiviruses improperly mark frpc as malware and delete it. This is due to frp being a networking tool capable of creating reverse proxies. Antiviruses sometimes flag reverse proxies due to their ability to bypass firewall port restrictions. If you are using antivirus, then you may need to whitelist/exclude frpc in your antivirus settings to avoid accidental quarantine/deletion. See [issue 3637](https://github.com/aircross/frp/issues/3637) for more details.
 
 ### Access your computer in a LAN network via SSH
 
@@ -1309,12 +1309,12 @@ Please refer to this [document](/doc/ssh_tunnel_gateway.md) for more information
 
 Interested in getting involved? We would like to help you!
 
-* Take a look at our [issues list](https://github.com/fatedier/frp/issues) and consider sending a Pull Request to **dev branch**.
+* Take a look at our [issues list](https://github.com/aircross/frp/issues) and consider sending a Pull Request to **dev branch**.
 * If you want to add a new feature, please create an issue first to describe the new feature, as well as the implementation approach. Once a proposal is accepted, create an implementation of the new features and submit it as a pull request.
 * Sorry for my poor English. Improvements for this document are welcome, even some typo fixes.
 * If you have great ideas, send an email to fatedier@gmail.com.
 
-**Note: We prefer you to give your advise in [issues](https://github.com/fatedier/frp/issues), so others with a same question can search it quickly and we don't need to answer them repeatedly.**
+**Note: We prefer you to give your advise in [issues](https://github.com/aircross/frp/issues), so others with a same question can search it quickly and we don't need to answer them repeatedly.**
 
 ## Donation
 

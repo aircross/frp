@@ -28,10 +28,10 @@ import (
 
 	"github.com/fatedier/golib/pool"
 
-	v1 "github.com/fatedier/frp/pkg/config/v1"
-	"github.com/fatedier/frp/pkg/transport"
-	"github.com/fatedier/frp/pkg/util/log"
-	netpkg "github.com/fatedier/frp/pkg/util/net"
+	v1 "github.com/aircross/frp/pkg/config/v1"
+	"github.com/aircross/frp/pkg/transport"
+	"github.com/aircross/frp/pkg/util/log"
+	netpkg "github.com/aircross/frp/pkg/util/net"
 )
 
 func init() {

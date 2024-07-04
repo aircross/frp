@@ -26,12 +26,12 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/aircross/frp/client/proxy"
+	"github.com/aircross/frp/pkg/config"
+	"github.com/aircross/frp/pkg/config/v1/validation"
+	httppkg "github.com/aircross/frp/pkg/util/http"
+	"github.com/aircross/frp/pkg/util/log"
 	netpkg "github.com/aircross/frp/pkg/util/net"
-	"github.com/fatedier/frp/client/proxy"
-	"github.com/fatedier/frp/pkg/config"
-	"github.com/fatedier/frp/pkg/config/v1/validation"
-	httppkg "github.com/fatedier/frp/pkg/util/http"
-	"github.com/fatedier/frp/pkg/util/log"
 )
 
 type GeneralResponse struct {
