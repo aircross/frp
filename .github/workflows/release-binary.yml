@@ -1,4 +1,4 @@
-name: Cross compile frp
+name: Frp-Binary-release
 
 on:
   workflow_dispatch:
@@ -12,9 +12,9 @@ on:
        - v*
 
 jobs:
-  WireProxy:
+  frp-release:
 
-    name: Cross compile frp
+    name: Frp-Binary-release
 
     runs-on: ubuntu-latest
 
