@@ -1,0 +1,65 @@
+name: Cross compile frp
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag'
+        required: true
+        default: 'v0.58.1'
+  create:
+     tags:
+       - v*
+
+jobs:
+  WireProxy:
+
+    name: Cross compile frp
+
+    runs-on: ubuntu-latest
+
+    env:
+      workdir: ./frp
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Git clone frp
+        run: |
+          git clone https://github.com/${{ github.repository_owner }}/frp.git ${{ env.workdir }}
+          cp ./.goreleaser.yml ${{ env.workdir }}/.goreleaser.yml
+
+      - name: Set up GoReleaser
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      # get image tag name
+      - name: Get Image Tag Name
+        run: |
+          if [ x${{ github.event.inputs.tag }} == x"" ]; then
+            echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          else
+            echo "TAG_NAME=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+          fi
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          distribution: goreleaser
+          workdir: ${{ env.workdir }}
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GPR_TOKEN }}
+
+      - name: Release binaries
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: TAG_NAME
+          files: ${{ env.workdir }}/dist/*.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GPR_TOKEN }}
