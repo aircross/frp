@@ -260,7 +260,6 @@ func (c *defaultConnectorImpl) realConnect() (net.Conn, error) {
 	} else {
 		return nil, err
 	}
-
 }
 
 func (c *defaultConnectorImpl) Close() error {
