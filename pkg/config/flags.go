@@ -25,6 +25,7 @@ import (
 	"github.com/fatedier/frp/pkg/config/types"
 	v1 "github.com/fatedier/frp/pkg/config/v1"
 	"github.com/fatedier/frp/pkg/config/v1/validation"
+	netpkg "github.com/fatedier/frp/pkg/util/ip"
 )
 
 // WordSepNormalizeFunc changes all flags that contain "_" separators
@@ -151,7 +152,7 @@ func RegisterClientCommonConfigFlags(cmd *cobra.Command, c *v1.ClientCommonConfi
 	}
 
 	if !options.sshMode {
-		cmd.PersistentFlags().StringVarP(&c.ServerAddr, "server_addr", "s", "127.0.0.1", "frp server's address")
+		cmd.PersistentFlags().StringVarP(&netpkg.GetDomainIP(c.ServerAddr), "server_addr", "s", "127.0.0.1", "frp server's address")
 		cmd.PersistentFlags().IntVarP(&c.ServerPort, "server_port", "P", 7000, "frp server's port")
 		cmd.PersistentFlags().StringVarP(&c.Transport.Protocol, "protocol", "p", "tcp",
 			fmt.Sprintf("optional values are %v", validation.SupportedTransportProtocols))

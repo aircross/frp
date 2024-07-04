@@ -31,6 +31,7 @@ import (
 
 	v1 "github.com/fatedier/frp/pkg/config/v1"
 	"github.com/fatedier/frp/pkg/transport"
+	netpkg "github.com/fatedier/frp/pkg/util/ip"
 	netpkg "github.com/fatedier/frp/pkg/util/net"
 	"github.com/fatedier/frp/pkg/util/xlog"
 )
@@ -91,7 +92,7 @@ func (c *defaultConnectorImpl) Open() error {
 
 		conn, err := quic.DialAddr(
 			c.ctx,
-			net.JoinHostPort(c.cfg.ServerAddr, strconv.Itoa(c.cfg.ServerPort)),
+			net.JoinHostPort(netpkg.GetDomainIP(c.cfg.ServerAddr), strconv.Itoa(c.cfg.ServerPort)),
 			tlsConfig, &quic.Config{
 				MaxIdleTimeout:     time.Duration(c.cfg.Transport.QUIC.MaxIdleTimeout) * time.Second,
 				MaxIncomingStreams: int64(c.cfg.Transport.QUIC.MaxIncomingStreams),
@@ -208,7 +209,7 @@ func (c *defaultConnectorImpl) realConnect() (net.Conn, error) {
 	)
 	conn, err := libnet.DialContext(
 		c.ctx,
-		net.JoinHostPort(c.cfg.ServerAddr, strconv.Itoa(c.cfg.ServerPort)),
+		net.JoinHostPort(netpkg.GetDomainIP(c.cfg.ServerAddr), strconv.Itoa(c.cfg.ServerPort)),
 		dialOptions...,
 	)
 	return conn, err
