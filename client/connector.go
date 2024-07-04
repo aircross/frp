@@ -74,13 +74,6 @@ func (c *defaultConnectorImpl) Open() error {
 		if sn == "" {
 			sn = c.cfg.ServerAddr
 		}
-		// 判断c.cfg.ServerAddr是否IP
-		serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
-		if err != nil {
-			xl.Warnf("get serverIP fail, err: %v", err)
-			return err
-		}
-
 		if lo.FromPtr(c.cfg.Transport.TLS.Enable) {
 			tlsConfig, err = transport.NewClientTLSConfig(
 				c.cfg.Transport.TLS.CertFile,
@@ -95,6 +88,8 @@ func (c *defaultConnectorImpl) Open() error {
 			return err
 		}
 		tlsConfig.NextProtos = []string{"frp"}
+		serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
+		
 
 		conn, err := quic.DialAddr(
 			c.ctx,
@@ -213,17 +208,13 @@ func (c *defaultConnectorImpl) realConnect() (net.Conn, error) {
 		libnet.WithProxy(proxyType, addr),
 		libnet.WithProxyAuth(auth),
 	)
-	// 判断c.cfg.ServerAddr是否IP
 	serverIP, err := netpkg.GetDomainIP(c.cfg.ServerAddr)
-	if err == nil {
-		conn, err := libnet.DialContext(
-			c.ctx,
-			net.JoinHostPort(serverIP, strconv.Itoa(c.cfg.ServerPort)),
-			dialOptions...,
-		)
-		return conn, err
-	}
-	return nil, err
+	conn, err := libnet.DialContext(
+		c.ctx,
+		net.JoinHostPort(serverIP, strconv.Itoa(c.cfg.ServerPort)),
+		dialOptions...,
+	)
+	return conn, err
 }
 
 func (c *defaultConnectorImpl) Close() error {
