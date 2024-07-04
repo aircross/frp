@@ -181,7 +181,7 @@ func (svr *Service) apiStatus(w http.ResponseWriter, _ *http.Request) {
 
 	ps := ctl.pm.GetAllProxyStatus()
 	for _, status := range ps {
-		serverIP := netpkg.GetDomainIP(svr.common.ServerAddr)
+		serverIP, err  := netpkg.GetDomainIP(svr.common.ServerAddr)
 		res[status.Type] = append(res[status.Type], NewProxyStatusResp(status, serverIP))
 	}
 
