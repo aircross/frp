@@ -30,7 +30,7 @@ import (
 	"github.com/fatedier/frp/pkg/config"
 	"github.com/fatedier/frp/pkg/config/v1/validation"
 	httppkg "github.com/fatedier/frp/pkg/util/http"
-	netpkg "github.com/fatedier/frp/pkg/util/ip"
+	ippkg "github.com/fatedier/frp/pkg/util/ip"
 	"github.com/fatedier/frp/pkg/util/log"
 	netpkg "github.com/fatedier/frp/pkg/util/net"
 )
@@ -183,7 +183,7 @@ func (svr *Service) apiStatus(w http.ResponseWriter, _ *http.Request) {
 	ps := ctl.pm.GetAllProxyStatus()
 	for _, status := range ps {
 		
-		res[status.Type] = append(res[status.Type], NewProxyStatusResp(status, netpkg.GetDomainIP(svr.common.ServerAddr)))
+		res[status.Type] = append(res[status.Type], NewProxyStatusResp(status, ippkg.GetDomainIP(svr.common.ServerAddr)))
 	}
 
 	for _, arrs := range res {
