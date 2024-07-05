@@ -1,9 +1,9 @@
 # frp
 
-[![Build Status](https://circleci.com/gh/fatedier/frp.svg?style=shield)](https://circleci.com/gh/fatedier/frp)
-[![GitHub release](https://img.shields.io/github/tag/fatedier/frp.svg?label=release)](https://github.com/aircross/frp/releases)
+[![Build Status](https://circleci.com/gh/aircross/frp.svg?style=shield)](https://circleci.com/gh/aircross/frp)
+[![GitHub release](https://img.shields.io/github/tag/aircross/frp.svg?label=release)](https://github.com/aircross/frp/releases)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aircross/frp)](https://goreportcard.com/report/github.com/aircross/frp)
-[![GitHub Releases Stats](https://img.shields.io/github/downloads/fatedier/frp/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=fatedier&repository=frp)
+[![GitHub Releases Stats](https://img.shields.io/github/downloads/aircross/frp/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=aircross&repository=frp)
 
 [中文文档](https://github.com/aircross/frp/blob/dev/README.md) | [README](https://github.com/aircross/frp/blob/dev/README_en.md)
 
