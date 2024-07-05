@@ -1,11 +1,13 @@
 # frp
 
-[![Build Status](https://circleci.com/gh/fatedier/frp.svg?style=shield)](https://circleci.com/gh/fatedier/frp)
-[![GitHub release](https://img.shields.io/github/tag/fatedier/frp.svg?label=release)](https://github.com/aircross/frp/releases)
+[![Build Status](https://circleci.com/gh/aircross/frp.svg?style=shield)](https://circleci.com/gh/aircross/frp)
+[![GitHub release](https://img.shields.io/github/tag/aircross/frp.svg?label=release)](https://github.com/aircross/frp/releases)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aircross/frp)](https://goreportcard.com/report/github.com/aircross/frp)
-[![GitHub Releases Stats](https://img.shields.io/github/downloads/fatedier/frp/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=fatedier&repository=frp)
+[![GitHub Releases Stats](https://img.shields.io/github/downloads/aircross/frp/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=aircross&repository=frp)
 
-[中文文档](https://github.com/aircross/frp/blob/dev/README.md) | [README](https://github.com/aircross/frp/blob/dev/README_en.md)
+[README](https://github.com/aircross/frp/blob/dev/README_en.md) | [中文文档](https://github.com/aircross/frp/blob/dev/README.md)
+
+### 解决了客户端直接配置域名作为服务器IP使用时，因为使用绑定的域名未备案国内IP，而被阻断的问题
 
 #### Docker快速部署
 
@@ -119,7 +121,7 @@ v2 的构想是基于我多年在云原生领域，特别是在 K8s 和 ServiceM
 
 frp 是一个免费且开源的项目，我们欢迎任何人为其开发和进步贡献力量。
 
-* 在使用过程中出现任何问题，可以通过 [issues](https://github.com/aircross/frp/issues) 来反馈。
+* 在使用过程中出现任何问题，可以通过 [issues](https://github.com/fatedier/frp/issues) 来反馈。
 * Bug 的修复可以直接提交 Pull Request 到 dev 分支。
 * 如果是增加新的功能特性，请先创建一个 issue 并做简单描述以及大致的实现方法，提议被采纳后，就可以创建一个实现新特性的 Pull Request。
 * 欢迎对说明文档做出改善，帮助更多的人使用 frp，特别是英文文档。

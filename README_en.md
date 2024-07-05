@@ -1,59 +1,69 @@
 # frp
 
+[![Build Status](https://circleci.com/gh/aircross/frp.svg?style=shield)](https://circleci.com/gh/aircross/frp)
+[![GitHub release](https://img.shields.io/github/tag/aircross/frp.svg?label=release)](https://github.com/aircross/frp/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/aircross/frp)](https://goreportcard.com/report/github.com/aircross/frp)
+[![GitHub Releases Stats](https://img.shields.io/github/downloads/aircross/frp/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=aircross&repository=frp)
+
 [中文文档](https://github.com/aircross/frp/blob/dev/README.md) | [README](https://github.com/aircross/frp/blob/dev/README_en.md)
 
-## Docker Quick Guide
-#### Install Docker
+### Solved the problem of being blocked when the client directly configures a domain name as the server IP because the bind domain name is not registered as a domestic IP
+
+#### Run with Docker
+
+###### Install Docker
+
 ```
-#If your server is outside China, you can run the command below to install Docker
-curl -fsSL https://get.docker.com | sh
-# auto startup
-sudo systemctl enable docker.service
-# change to what you want start|restart|stop
-sudo service docker start
-```
-For installation in China, please refer to the following tutorial and use it in conjunction with a server that can access download.docker.com
-#### [和谐之后如何在国内安装Docker及拉取镜像使用](https://vps.la/2024/07/01/%e5%92%8c%e8%b0%90%e4%b9%8b%e5%90%8e%e5%a6%82%e4%bd%95%e5%9c%a8%e5%9b%bd%e5%86%85%e5%ae%89%e8%a3%85docker%e5%8f%8a%e6%8b%89%e5%8f%96%e9%95%9c%e5%83%8f%e4%bd%bf%e7%94%a8/)
-
-#### run the Frps
-
-```shell
-
-mkdir -p /opt/docker/frp/
-
-tee /opt/docker/frp/frps.toml <<-'EOF'
-bindPort = 7000
-# default is 127.0.0.1，change to 0.0.0.0 for the internet use
-webServer.addr = "0.0.0.0"
-webServer.port = 7500
-# username and password for dashboard 
-webServer.user = "admin"
-webServer.password = "admin"
-# auth token
-auth.token = "your token Here"
-EOF
-docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
+    #use the following command to install Docker outside China
+    curl -fsSL https://get.docker.com | sh
+    # Set auto startup
+    sudo systemctl enable docker.service
+    # run what you want like:start|restart|stop
+    sudo service docker start|restart|stop
 ```
 
-#### run the Frpc
-```
-mkdir -p /opt/docker/frp/
+For server inside China installation, please refer to the following tutorial and use it in conjunction with a server that can access download.docker.com
 
-tee /opt/docker/frp/frpc.toml <<-'EOF'
-serverAddr = "your frps ip here"
-serverPort = 7000
-# auth token
-auth.token = "your token Here"
+###### [和谐之后如何在国内安装Docker及拉取镜像使用](https://vps.la/2024/07/01/%e5%92%8c%e8%b0%90%e4%b9%8b%e5%90%8e%e5%a6%82%e4%bd%95%e5%9c%a8%e5%9b%bd%e5%86%85%e5%ae%89%e8%a3%85docker%e5%8f%8a%e6%8b%89%e5%8f%96%e9%95%9c%e5%83%8f%e4%bd%bf%e7%94%a8/)
 
-[[proxies]]
-name = "Node1_SSH"
-type = "tcp"
-localIP = "127.0.0.1"
-localPort = 22
-remotePort = 40022
-EOF
-docker run --name frpc -d --network host --restart=unless-stopped -v /opt/docker/frp/frpc.toml:/etc/frp/frpc.toml  aircross/frpc
+###### Run with Frps docker image
+
 ```
+    mkdir -p /opt/docker/frp/
+    
+    tee /opt/docker/frp/frps.toml <<-'EOF'
+    bindPort = 7000
+    # 默认为 127.0.0.1，如果需要公网访问，需要修改为 0.0.0.0。
+    webServer.addr = "0.0.0.0"
+    webServer.port = 7500
+    # dashboard 用户名密码，可选，默认为空
+    webServer.user = "admin"
+    webServer.password = "admin"
+    # auth token
+    auth.token = "your token Here"
+    EOF
+    docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
+```
+
+###### Run with Frpc docker image
+
+```mkdir -p /opt/docker/frp/
+    
+    tee /opt/docker/frp/frpc.toml <<-'EOF'
+    serverAddr = "your frps ip here"
+    serverPort = 7000
+    # auth token
+    auth.token = "your token Here"
+    
+    [[proxies]]
+    name = "Node1_SSH"
+    type = "tcp"
+    localIP = "127.0.0.1"
+    localPort = 22
+    remotePort = 40022
+    EOF
+    docker run --name frpc -d --network host --restart=unless-stopped -v /opt/docker/frp/frpc.toml:/etc/frp/frpc.toml  aircross/frpc
+``` 
 
 # Sponsor  
 
@@ -77,12 +87,12 @@ frp also offers a P2P connect mode.
 <!-- vim-markdown-toc GFM -->
 
 - [frp](#frp)
-  - [Docker Quick Guide](#docker-quick-guide)
-      - [Install Docker](#install-docker)
-      - [和谐之后如何在国内安装Docker及拉取镜像使用](#和谐之后如何在国内安装docker及拉取镜像使用)
-      - [run the Frps](#run-the-frps)
-      - [run the Frpc](#run-the-frpc)
-- [Sponsor](#sponsor)
+      - [Docker快速部署](#docker快速部署)
+          - [安装Docker](#安装docker)
+          - [和谐之后如何在国内安装Docker及拉取镜像使用](#和谐之后如何在国内安装docker及拉取镜像使用)
+          - [运行Frps的镜像](#运行frps的镜像)
+          - [运行Frpc的镜像](#运行frpc的镜像)
+      - [推荐服务器](#推荐服务器)
   - [What is frp?](#what-is-frp)
   - [Table of Contents](#table-of-contents)
   - [Development Status](#development-status)
