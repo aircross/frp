@@ -21,6 +21,7 @@ import (
 
 	"github.com/aircross/frp/pkg/config/types"
 	v1 "github.com/aircross/frp/pkg/config/v1"
+	netpkg "github.com/aircross/frp/pkg/util/net"
 )
 
 func Convert_ClientCommonConf_To_v1(conf *ClientCommonConf) *v1.ClientCommonConfig {
@@ -41,7 +42,8 @@ func Convert_ClientCommonConf_To_v1(conf *ClientCommonConf) *v1.ClientCommonConf
 	out.Auth.OIDC.TokenEndpointURL = conf.ClientConfig.OidcTokenEndpointURL
 	out.Auth.OIDC.AdditionalEndpointParams = conf.ClientConfig.OidcAdditionalEndpointParams
 
-	out.ServerAddr = conf.ServerAddr
+	serverIP, _ := netpkg.GetDomainIP(conf.ServerAddr)
+	out.ServerAddr = serverIP
 	out.ServerPort = conf.ServerPort
 	out.NatHoleSTUNServer = conf.NatHoleSTUNServer
 	out.Transport.DialServerTimeout = conf.DialServerTimeout
