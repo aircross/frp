@@ -14,12 +14,12 @@
 ###### 安装Docker
 
 ```
-    #国外服务器使用以下命令安装Docker
-    curl -fsSL https://get.docker.com | sh
-    # 设置开机自启
-    sudo systemctl enable docker.service
-    # 根据实际需要保留参数start|restart|stop
-    sudo service docker start|restart|stop
+#国外服务器使用以下命令安装Docker
+curl -fsSL https://get.docker.com | sh
+# 设置开机自启
+sudo systemctl enable docker.service
+# 根据实际需要保留参数start|restart|stop
+sudo service docker start|restart|stop
 ```
 
 国内的请参照下面这个教程安装，需要配合能访问download.docker.com的服务器服用
@@ -29,40 +29,41 @@
 ###### 运行Frps的镜像
 
 ```
-    mkdir -p /opt/docker/frp/
-    
-    tee /opt/docker/frp/frps.toml <<-'EOF'
-    bindPort = 7000
-    # 默认为 127.0.0.1，如果需要公网访问，需要修改为 0.0.0.0。
-    webServer.addr = "0.0.0.0"
-    webServer.port = 7500
-    # dashboard 用户名密码，可选，默认为空
-    webServer.user = "admin"
-    webServer.password = "admin"
-    # auth token
-    auth.token = "your token Here"
-    EOF
-    docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
+mkdir -p /opt/docker/frp/
+
+tee /opt/docker/frp/frps.toml <<-'EOF'
+bindPort = 7000
+# 默认为 127.0.0.1，如果需要公网访问，需要修改为 0.0.0.0。
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+# dashboard 用户名密码，可选，默认为空
+webServer.user = "admin"
+webServer.password = "admin"
+# auth token
+auth.token = "your token Here"
+EOF
+docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
 ```
 
 ###### 运行Frpc的镜像
 
-```mkdir -p /opt/docker/frp/
+```
+mkdir -p /opt/docker/frp/
     
-    tee /opt/docker/frp/frpc.toml <<-'EOF'
-    serverAddr = "your frps ip here"
-    serverPort = 7000
-    # auth token
-    auth.token = "your token Here"
-    
-    [[proxies]]
-    name = "Node1_SSH"
-    type = "tcp"
-    localIP = "127.0.0.1"
-    localPort = 22
-    remotePort = 40022
-    EOF
-    docker run --name frpc -d --network host --restart=unless-stopped -v /opt/docker/frp/frpc.toml:/etc/frp/frpc.toml  aircross/frpc
+tee /opt/docker/frp/frpc.toml <<-'EOF'
+serverAddr = "your frps ip here"
+serverPort = 7000
+# auth token
+auth.token = "your token Here"
+
+[[proxies]]
+name = "Node1_SSH"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 40022
+EOF
+docker run --name frpc -d --network host --restart=unless-stopped -v /opt/docker/frp/frpc.toml:/etc/frp/frpc.toml  aircross/frpc
 ``` 
 
 #### 推荐服务器
