@@ -18,6 +18,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/aircross/frp/pkg/config/types"
+	netpkg "github.com/aircross/frp/pkg/util/net"
 	"github.com/aircross/frp/pkg/util/util"
 )
 
@@ -105,7 +106,8 @@ func (c *ServerConfig) Complete() {
 	c.WebServer.Complete()
 	c.SSHTunnelGateway.Complete()
 
-	c.BindAddr = util.EmptyOr(c.BindAddr, "0.0.0.0")
+	serverIP, _ := netpkg.GetDomainIP(c.BindAddr)
+	c.BindAddr = util.EmptyOr(serverIP, "0.0.0.0")
 	c.BindPort = util.EmptyOr(c.BindPort, 7000)
 	if c.ProxyBindAddr == "" {
 		c.ProxyBindAddr = c.BindAddr
