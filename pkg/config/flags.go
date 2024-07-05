@@ -225,8 +225,7 @@ func (f *BoolFuncFlag) Type() string {
 }
 
 func RegisterServerConfigFlags(cmd *cobra.Command, c *v1.ServerConfig, opts ...RegisterFlagOption) {
-	serverIP, _ := netpkg.GetDomainIP(c.BindAddr)
-	cmd.PersistentFlags().StringVarP(&serverIP, "bind_addr", "", "0.0.0.0", "bind address")
+	cmd.PersistentFlags().StringVarP(&c.BindAddr, "bind_addr", "", "0.0.0.0", "bind address")
 	cmd.PersistentFlags().IntVarP(&c.BindPort, "bind_port", "p", 7000, "bind port")
 	cmd.PersistentFlags().IntVarP(&c.KCPBindPort, "kcp_bind_port", "", 0, "kcp bind udp port")
 	cmd.PersistentFlags().StringVarP(&c.ProxyBindAddr, "proxy_bind_addr", "", "0.0.0.0", "proxy bind address")
