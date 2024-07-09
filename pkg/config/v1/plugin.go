@@ -26,7 +26,9 @@ import (
 	"github.com/aircross/frp/pkg/util/util"
 )
 
-type ClientPluginOptions interface{}
+type ClientPluginOptions interface {
+	Complete()
+}
 
 type TypedClientPluginOptions struct {
 	Type string `json:"type"`
@@ -103,11 +105,15 @@ type HTTP2HTTPSPluginOptions struct {
 	RequestHeaders    HeaderOperations `json:"requestHeaders,omitempty"`
 }
 
+func (o *HTTP2HTTPSPluginOptions) Complete() {}
+
 type HTTPProxyPluginOptions struct {
 	Type         string `json:"type,omitempty"`
 	HTTPUser     string `json:"httpUser,omitempty"`
 	HTTPPassword string `json:"httpPassword,omitempty"`
 }
+
+func (o *HTTPProxyPluginOptions) Complete() {}
 
 type HTTPS2HTTPPluginOptions struct {
 	Type              string           `json:"type,omitempty"`
@@ -152,6 +158,8 @@ type Socks5PluginOptions struct {
 	Password string `json:"password,omitempty"`
 }
 
+func (o *Socks5PluginOptions) Complete() {}
+
 type StaticFilePluginOptions struct {
 	Type         string `json:"type,omitempty"`
 	LocalPath    string `json:"localPath,omitempty"`
@@ -159,6 +167,8 @@ type StaticFilePluginOptions struct {
 	HTTPUser     string `json:"httpUser,omitempty"`
 	HTTPPassword string `json:"httpPassword,omitempty"`
 }
+
+func (o *StaticFilePluginOptions) Complete() {}
 
 type UnixDomainSocketPluginOptions struct {
 	Type     string `json:"type,omitempty"`

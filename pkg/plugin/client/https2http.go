@@ -28,9 +28,11 @@ import (
 	"time"
 
 	"github.com/fatedier/golib/pool"
+	"github.com/samber/lo"
 
 	v1 "github.com/aircross/frp/pkg/config/v1"
 	"github.com/aircross/frp/pkg/transport"
+	httppkg "github.com/aircross/frp/pkg/util/http"
 	"github.com/aircross/frp/pkg/util/log"
 	netpkg "github.com/aircross/frp/pkg/util/net"
 )
@@ -72,6 +74,17 @@ func NewHTTPS2HTTPPlugin(options v1.ClientPluginOptions) (Plugin, error) {
 		BufferPool: pool.NewBuffer(32 * 1024),
 		ErrorLog:   stdlog.New(log.NewWriteLogger(log.WarnLevel, 2), "", 0),
 	}
+	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.TLS != nil {
+			tlsServerName, _ := httppkg.CanonicalHost(r.TLS.ServerName)
+			host, _ := httppkg.CanonicalHost(r.Host)
+			if tlsServerName != "" && tlsServerName != host {
+				w.WriteHeader(http.StatusMisdirectedRequest)
+				return
+			}
+		}
+		rp.ServeHTTP(w, r)
+	})
 
 	tlsConfig, err := transport.NewServerTLSConfig(p.opts.CrtPath, p.opts.KeyPath, "")
 	if err != nil {
@@ -79,9 +92,12 @@ func NewHTTPS2HTTPPlugin(options v1.ClientPluginOptions) (Plugin, error) {
 	}
 
 	p.s = &http.Server{
-		Handler:           rp,
+		Handler:           handler,
 		ReadHeaderTimeout: 60 * time.Second,
 		TLSConfig:         tlsConfig,
+	}
+	if !lo.FromPtr(opts.EnableHTTP2) {
+		p.s.TLSNextProto = make(map[string]func(*http.Server, *tls.Conn, http.Handler))
 	}
 
 	go func() {
