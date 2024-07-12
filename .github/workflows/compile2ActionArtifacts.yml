@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  goreleaser:
+  compile2ActionArtifacts:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,5 +27,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: packages
-          path: packages/
+          name: release
+          path: release/
