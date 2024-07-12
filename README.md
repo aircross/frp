@@ -37,14 +37,29 @@ bindPort = 7000
 webServer.addr = "0.0.0.0"
 webServer.port = 7500
 # dashboard 用户名密码，可选，默认为空
+# dashboard 用户名密码，可选，默认为空
 webServer.user = "admin"
 webServer.password = "admin"
 # auth token
 auth.token = "your token Here"
 EOF
 docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
+# auth token
+auth.token = "your token Here"
+EOF
+docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
 ```
 
+###### 运行Frpc的镜像
+
+```
+mkdir -p /opt/docker/frp/
+    
+tee /opt/docker/frp/frpc.toml <<-'EOF'
+serverAddr = "your frps ip here"
+serverPort = 7000
+# auth token
+auth.token = "your token Here"
 ###### 运行Frpc的镜像
 
 ```

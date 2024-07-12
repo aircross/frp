@@ -41,6 +41,7 @@ func Convert_ClientCommonConf_To_v1(conf *ClientCommonConf) *v1.ClientCommonConf
 	out.Auth.OIDC.Scope = conf.ClientConfig.OidcScope
 	out.Auth.OIDC.TokenEndpointURL = conf.ClientConfig.OidcTokenEndpointURL
 	out.Auth.OIDC.AdditionalEndpointParams = conf.ClientConfig.OidcAdditionalEndpointParams
+
 	serverIP, _ := netpkg.GetDomainIP(conf.ServerAddr)
 	out.ServerAddr = serverIP
 	out.ServerPort = conf.ServerPort

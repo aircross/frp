@@ -17,6 +17,7 @@ jobs:
     name: Build Image from Dockerfile and binaries
     runs-on: ubuntu-latest
     steps:
+
       # environment
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,6 +38,7 @@ jobs:
           else
             echo "TAG_NAME=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
           fi
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
@@ -59,6 +61,10 @@ jobs:
           echo "TAG_FRPS=aircross/frps:${{ env.TAG_NAME }}" >> $GITHUB_ENV
           echo "TAG_FRPC_GPR=ghcr.io/aircross/frpc:${{ env.TAG_NAME }}" >> $GITHUB_ENV
           echo "TAG_FRPS_GPR=ghcr.io/aircross/frps:${{ env.TAG_NAME }}" >> $GITHUB_ENV
+          echo "TAG_FRPC_LATEST=aircross/frpc:latest" >> $GITHUB_ENV
+          echo "TAG_FRPS_LATEST=aircross/frps:latest" >> $GITHUB_ENV
+          echo "TAG_FRPC_GPR_LATEST=ghcr.io/aircross/frpc:latest" >> $GITHUB_ENV
+          echo "TAG_FRPS_GPR_LATEST=ghcr.io/aircross/frps:latest" >> $GITHUB_ENV
 
       - name: Build and push frpc
         uses: docker/build-push-action@v5
@@ -69,7 +75,9 @@ jobs:
           push: true
           tags: |
             ${{ env.TAG_FRPC }}
+            ${{ env.TAG_FRPC_LATEST }}
             ${{ env.TAG_FRPC_GPR }}
+            ${{ env.TAG_FRPC_GPR_LATEST }}
 
       - name: Build and push frps
         uses: docker/build-push-action@v5
@@ -80,4 +88,22 @@ jobs:
           push: true
           tags: |
             ${{ env.TAG_FRPS }}
+            ${{ env.TAG_FRPS_LATEST }}
             ${{ env.TAG_FRPS_GPR }}
+            ${{ env.TAG_FRPS_GPR_LATEST }}
+
+      - name: Sync frps README.md
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}s
+          readme: "./README.md"
+
+      - name: Sync frpc README.md
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}c
+          readme: "./README.md"

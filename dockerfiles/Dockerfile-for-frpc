@@ -10,3 +10,4 @@ FROM alpine:3
 COPY --from=building /building/bin/frpc /usr/bin/frpc
 
 ENTRYPOINT ["/usr/bin/frpc"]
+CMD ["-c", "/etc/frp/frpc.toml"]

@@ -1,4 +1,4 @@
-name: goreleaser
+name: 编译到Action的Artifacts
 
 on:
   workflow_dispatch:
@@ -24,10 +24,8 @@ jobs:
         run: |
           ./package.sh
 
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v5
+      - name: Upload
+        uses: actions/upload-artifact@v4
         with:
-          version: latest
-          args: release --clean --release-notes=./Release.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GPR_TOKEN }}
+          name: packages
+          path: packages/

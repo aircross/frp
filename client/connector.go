@@ -70,7 +70,7 @@ func (c *defaultConnectorImpl) Open() error {
 	if strings.EqualFold(c.cfg.Transport.Protocol, "quic") {
 		var tlsConfig *tls.Config
 		var err error
-		serverIP, _ := netpkg.GetDomainIP(c.cfg.ServerAddr)
+		
 		sn := c.cfg.Transport.TLS.ServerName
 		if sn == "" {
 			sn = c.cfg.ServerAddr
@@ -89,6 +89,7 @@ func (c *defaultConnectorImpl) Open() error {
 			return err
 		}
 		tlsConfig.NextProtos = []string{"frp"}
+		serverIP, _ := netpkg.GetDomainIP(c.cfg.ServerAddr)
 		conn, err := quic.DialAddr(
 			c.ctx,
 			net.JoinHostPort(serverIP, strconv.Itoa(c.cfg.ServerPort)),
