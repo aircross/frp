@@ -70,5 +70,6 @@ for os in $os_all; do
         done
     done
 done
+ls > list.txt
 
 cd -

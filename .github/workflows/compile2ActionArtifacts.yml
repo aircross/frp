@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  goreleaser:
+  compile2ActionArtifacts:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
