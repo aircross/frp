@@ -228,7 +228,7 @@ func (svr *Service) keepControllerWorking() {
 // session: if it's not nil, using tcp mux
 func (svr *Service) login() (conn net.Conn, connector Connector, err error) {
 	xl := xlog.FromContextSafe(svr.ctx)
-	xl.Infof("login...%s", svr.common.ServerAddr)
+	// xl.Infof("login...%s", svr.common.ServerAddr)
 	connector = svr.connectorCreator(svr.ctx, svr.common)
 	if err = connector.Open(); err != nil {
 		return nil, nil, err
