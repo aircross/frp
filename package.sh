@@ -70,6 +70,6 @@ for os in $os_all; do
         done
     done
 done
-ls ./packages > list.txt
+ls ./packages > ./packages/list.txt
 
 cd -
