@@ -228,6 +228,7 @@ func (svr *Service) keepControllerWorking() {
 // session: if it's not nil, using tcp mux
 func (svr *Service) login() (conn net.Conn, connector Connector, err error) {
 	xl := xlog.FromContextSafe(svr.ctx)
+	xl.Infof("login...%s", svr.common.ServerAddr)
 	connector = svr.connectorCreator(svr.ctx, svr.common)
 	if err = connector.Open(); err != nil {
 		return nil, nil, err
@@ -292,6 +293,7 @@ func (svr *Service) loopLoginUntilSuccess(maxInterval time.Duration, firstLoginE
 
 	loginFunc := func() (bool, error) {
 		xl.Infof("try to connect to server...")
+		// xl.Infof("svr.common.ServerAddr: %v", svr.common.ServerAddr)
 		conn, connector, err := svr.login()
 		if err != nil {
 			xl.Warnf("connect to server error: %v", err)
