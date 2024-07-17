@@ -44,27 +44,12 @@ webServer.password = "admin"
 auth.token = "your token Here"
 EOF
 docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
-# auth token
-auth.token = "your token Here"
-EOF
-docker run --name frps -d --network host --restart=unless-stopped -v /opt/docker/frp/frps.toml:/etc/frp/frps.toml  aircross/frps
 ```
 
 ###### 运行Frpc的镜像
 
 ```
 mkdir -p /opt/docker/frp/
-    
-tee /opt/docker/frp/frpc.toml <<-'EOF'
-serverAddr = "your frps ip here"
-serverPort = 7000
-# auth token
-auth.token = "your token Here"
-###### 运行Frpc的镜像
-
-```
-mkdir -p /opt/docker/frp/
-    
 tee /opt/docker/frp/frpc.toml <<-'EOF'
 serverAddr = "your frps ip here"
 serverPort = 7000
