@@ -70,7 +70,6 @@ func (c *defaultConnectorImpl) Open() error {
 	if strings.EqualFold(c.cfg.Transport.Protocol, "quic") {
 		var tlsConfig *tls.Config
 		var err error
-		
 		sn := c.cfg.Transport.TLS.ServerName
 		if sn == "" {
 			sn = c.cfg.ServerAddr
