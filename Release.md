@@ -1,3 +1,3 @@
 ### Features
 
-* Added a new plugin "http2http" which allows forwarding HTTP requests to another HTTP server, supporting options like local address binding, host header rewrite, and custom request headers.
+* Added a new plugin `tls2raw`: Enables TLS termination and forwarding of decrypted raw traffic to local service.
