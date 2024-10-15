@@ -1,6 +1,6 @@
 ### Features
 
-* Added a new plugin "http2http" which allows forwarding HTTP requests to another HTTP server, supporting options like local address binding, host header rewrite, and custom request headers.
+* The frpc visitor command-line parameter adds the `--server-user` option to specify the username of the server-side proxy to connect to.
 * Added `enableHTTP2` option to control whether to enable HTTP/2 in plugin https2http and https2https, default is true.
 
 ### Changes
